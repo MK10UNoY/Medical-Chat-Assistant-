@@ -5,33 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Disease Predictor</title>
-    <!-- <<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <div class="container">
-        <h1>Disease Predictor</h1>
-        <form method="POST">
-            <p>Enter at least 3 inputs. Leave the rest blank.</p>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto my-8 p-8 bg-white rounded-lg shadow-lg max-w-xl">
+        <h1 class="text-4xl font-semibold text-center text-blue-600 mb-6">Disease Predictor</h1>
+        
+        <form method="POST" class="space-y-4">
+            <p class="text-center text-gray-600 mb-4">Enter at least 3 symptoms. Leave the rest blank.</p>
+
             {% for i in range(1, 12) %}
             <div class="form-group">
-                <label for="input{{ i }}">Input {{ i }}:</label>
-                <input type="text" id="input{{ i }}" name="input{{ i }}"
-                    value="{{ 'NaN' if inputs and inputs['input' ~ i]|string == 'np.nan' else inputs.get('input' ~ i, '') }}"
-                    placeholder="Input {{ i }}">
-
+                <label for="input{{ i }}" class="block text-gray-700 font-medium">Input {{ i }}:</label>
+                <input type="text" id="input{{ i }}" name="input{{ i }}" 
+                    value="{{ 'NaN' if inputs and inputs['input' ~ i]|string == 'np.nan' else inputs.get('input' ~ i, '') }}" 
+                    placeholder="Input {{ i }}"
+                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-800">
             </div>
             {% endfor %}
-            <button type="submit">Predict</button>
+            <div class="text-center">
+                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">Predict</button>
+            </div>
         </form>
 
         {% if prediction %}
-        <div class="result">
-            <h2>Prediction Result:</h2>
-            <p>{{ prediction }}</p>
+        <div class="mt-6 bg-gray-100 p-4 rounded-md shadow-md">
+            <h2 class="text-2xl font-semibold text-center text-blue-600">Prediction Result:</h2>
+            <p class="text-center text-1xl text-orange-800 mt-4">{{ prediction }}</p>
         </div>
         {% endif %}
     </div>
+    <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+        <p class="text-sm">
+            Predictions are made under a fixed dataset for study-related purposes only. Always consult a doctor in all cases.
+        </p>
+        <p class="text-sm mt-2 text-bold">
+            <b>&copy; 2025 Disease Predictor. All Rights Reserved.</b>
+        </p>
+        <p class="text-md mt-2 text-bold">
+            Developed by Shriya, Ishan and Mrinmoy.
+        </p>
+    </footer>
 </body>
 
 </html>

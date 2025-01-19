@@ -154,7 +154,7 @@ def predictor():
                 predicted_disease = predict_disease(preprocessed_inputs)
                 print("checkpoint")
                 print(predict_disease)
-                prediction = f"Predicted Disease: {predicted_disease}"
+                prediction = f"Possible Case of {predicted_disease}"
             except Exception as e:
                 prediction = f"Error during prediction: {str(e)}"
 
